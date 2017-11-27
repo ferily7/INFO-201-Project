@@ -1,5 +1,5 @@
 library(dplyr)
-library(plotrix)
+library(plotly)
 
 setwd("~/Desktop/INFO201/INFO-201-Project")
 
@@ -10,13 +10,8 @@ get.org <- breaches %>%
   group_by(type_org) %>%
   summarize(count = n()) 
   
-total.count <- sum(get.org$count)
 
-get.org <- get.org %>%
-  mutate(percent = round((count * 100)/total.count, digits = 2))
-
-labels <- paste0(get.org$type_org, " ", get.org$percent, "%")
-
-jpeg('data/pie_chart.jpg')
-pie3D(get.org$percent, labels = labels, explode = 0.2, labelcex = 0.7, theta = pi/6)
-dev.off()
+plot_ly(get.org, values = ~count, labels = ~type_org, type = "pie" ) %>%
+  layout(title = 'Type of Organizations affected by the data breaches',
+         xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+         yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
