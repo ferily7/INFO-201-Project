@@ -11,7 +11,7 @@ shinyServer(function(input, output) {
   output$selectBox <- renderPlotly({
     
     # Passing dataset and input choice to function
-    #OrgBarChart(breaches, input$choice)
+    OrgBarChart(breaches, input$choice)
 
   })
   
