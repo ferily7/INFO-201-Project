@@ -12,8 +12,10 @@ breaches$year <- breaches$year + 2004
 # Drop records_lost col due to superior measure records_lost_v2 col, then rename
 breaches <- breaches %>% select(-records_lost) %>% rename(records_lost = records_lost_v2)
 
-# Could display a quick "headline" story about one of these data breaches listed as "interesting"?
-top.stories <- breaches %>% filter(interesting == "y") %>% select(description)
+# Select random story from interesting list
+top.stories <- breaches %>% filter(interesting == "y")
+story <- top.stories[sample(nrow(top.stories), 1), ]
+
 
 # Convert data_sensitivity column from integers to specific strings
 breaches$data_sensitivity[breaches$data_sensitivity == 1] <- "General online info"
