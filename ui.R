@@ -1,10 +1,11 @@
+library(shinythemes)
 library(shiny)
 library(plotly)
 library(ggplot2)
 
 source('dataset.R')
 
-my.ui <- navbarPage(
+my.ui <- navbarPage(theme = shinytheme("cosmo"),
   
   # Application title
   "Name",
@@ -16,7 +17,8 @@ my.ui <- navbarPage(
         tags$p("Today's story is with ", tags$b(story$entity_name),
                if (story$alt_name != ""){
                 (paste0("(",story$alt_name,")"))
-               }, "!"),
+               }
+               ),
         tags$p("In ", story$year, ", ", story$description),
         tags$p("There was an estimated ", story$records_lost, " records lost!"),
         tags$a(href=story$source_1, "Continue reading..."),
