@@ -4,6 +4,7 @@ library(plotly)
 library(ggplot2)
 
 source('dataset.R')
+source('bar_chart.R')
 
 shinyServer(function(input, output) {
   
