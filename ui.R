@@ -61,15 +61,34 @@ my.ui <- navbarPage(
   ),
   
   tabPanel("Tab 3",
-    sidebarLayout(
-      sidebarPanel(
-        
-      ),
-      
-      mainPanel(
-        
-      )
-    )
+           sidebarLayout(
+             sidebarPanel(
+               selectInput("filter", "Filter by:",
+                           c("All" = "all",
+                             "Web" = "web", 
+                             "Financial" = "financial", 
+                             "Telecommunications" = "telecoms", 
+                             "Technology" = "tech", 
+                             "Government" = "government", 
+                             "Retail" = "retail", 
+                             "Energy" = "energy", 
+                             "Academia" = "academic", 
+                             "Healthcare" = "healthcare", 
+                             "Military" = "military",
+                             "Gaming" = "gaming", 
+                             "Media" = "media", 
+                             "Transportation" = "transport", 
+                             "Legal" = "legal", 
+                             "Applications" = "app")
+               )
+             ),
+             mainPanel(
+               tabsetPanel(
+                 tabPanel("Bar Graph", plotlyOutput("barGraph")),
+                 tabPanel("Time Series", plotlyOutput("timeSeries"))
+               )
+             )
+           )
   ),
   
   tabPanel("Tab 4",
@@ -83,31 +102,14 @@ my.ui <- navbarPage(
       )
     )
   ),
-  # Mitch's tab - time series
+
   tabPanel("Tab 5",
     sidebarLayout(
       sidebarPanel(
-        selectInput("filter", "Filter by:",
-                    c("All" = "all",
-                      "Web" = "web", 
-                      "Financial" = "financial", 
-                      "Telecommunications" = "telecoms", 
-                      "Technology" = "tech", 
-                      "Government" = "government", 
-                      "Retail" = "retail", 
-                      "Energy" = "energy", 
-                      "Academia" = "academic", 
-                      "Healthcare" = "healthcare", 
-                      "Military" = "military",
-                      "Gaming" = "gaming", 
-                      "Media" = "media", 
-                      "Transportation" = "transport", 
-                      "Legal" = "legal", 
-                      "Applications" = "app")
-        )
+
       ),
       mainPanel(
-         plotlyOutput("timeSeries")
+
       )
     )
   )
