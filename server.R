@@ -27,7 +27,7 @@ shinyServer(function(input, output) {
     
     # Make Bar graph
     plot_ly(x = top.ten$records_lost, y = top.ten$abbreviation, type = 'bar', text = ifelse(nchar(top.ten$entity_name) > 20, top.ten$entity_name, "")) %>% 
-      layout(title = "Top 10 Highest Cyber Breaches by Organization", margin = list(l = 150))
+      layout(title = "Top 10 Highest Cyber Breaches", margin = list(l = 150))
   })
   
   # Create time series of data breaches from 2003 to 2014

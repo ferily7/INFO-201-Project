@@ -89,8 +89,8 @@ my.ui <- navbarPage(theme = shinytheme("cosmo"),
              ),
              mainPanel(
                tabsetPanel(
-                 tabPanel("Bar Graph", plotlyOutput("barGraph")),
-                 tabPanel("Time Series", plotlyOutput("timeSeries"))
+                 tabPanel("Bar Graph", br(), plotlyOutput("barGraph")),
+                 tabPanel("Time Series", br(), plotlyOutput("timeSeries"))
                )
              )
            )
