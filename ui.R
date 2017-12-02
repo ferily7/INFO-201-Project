@@ -90,7 +90,16 @@ my.ui <- navbarPage(theme = shinytheme("cosmo"),
              mainPanel(
                tabsetPanel(
                  tabPanel("Bar Graph", br(), plotlyOutput("barGraph")),
-                 tabPanel("Time Series", br(), plotlyOutput("timeSeries"))
+                 tabPanel("Time Series",
+                          tags$br(),
+                          tags$h4("How do data breaches behave over time?"),
+                          tags$p("Below is a time series plot revealing how many data breaches have
+                                 occurred during the 2004-2017. The yellow line is a best-line fit
+                                 highlighting the trend of the data. Notice it remains increasing
+                                 for most of the organization types, with the few exceptions only due
+                                 a smaller sample size."),
+                          tags$br(),
+                          plotlyOutput("timeSeries"))
                )
              )
            )

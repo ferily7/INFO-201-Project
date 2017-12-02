@@ -71,7 +71,7 @@ shinyServer(function(input, output) {
     plot_ly(grouped_breaches, x = year, y = counts, type = "scatter", mode = "lines",
             text = paste(counts, "breaches observed in", year)) %>%
       add_trace(x = year, y = fitted(fit), mode = "lines") %>%
-      layout(title = "How do data breaches behave over time?",
+      layout(title = "Number of Data Breaches From 2004 - 2017",
              xaxis = list(title = "Year (2003 - 2017)"),
              yaxis = list(title = "Number of data breaches"))
   })
