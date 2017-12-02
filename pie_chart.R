@@ -1,8 +1,7 @@
 library(dplyr)
 library(plotly)
 
-breaches <- read.csv(file = "data/data_breaches.csv", stringsAsFactors = FALSE)
-
+source('dataset.R')
 
 get.org <- breaches %>% 
   group_by(type_org) %>%
