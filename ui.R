@@ -17,11 +17,23 @@ my.ui <- navbarPage(
                     selected = 1)
       ),
     
-      mainPanel(
-        plotlyOutput("selectBox")
+    mainPanel(
+          plotlyOutput("selectBox")
+        )
       )
+    ),
+    tabPanel("Year vs. Leaked Method",
+             sidebarLayout(
+               sidebarPanel(
+                 sliderInput("obs", "Year:", min = 2004, max = 2017, value = 1, sep = "")
+               ),
+               
+               mainPanel(
+                 plotlyOutput("distplot")
+               )
+             )
     )
   )
-)
+  
 
 shinyUI(my.ui)
