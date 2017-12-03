@@ -2,7 +2,6 @@ library(shinythemes)
 library(shiny)
 library(plotly)
 library(ggplot2)
-
 source('dataset.R')
 
 my.ui <- navbarPage(theme = shinytheme("cosmo"),
@@ -54,16 +53,14 @@ my.ui <- navbarPage(theme = shinytheme("cosmo"),
   ),
   
   tabPanel("Tab 2",
-    sidebarLayout(
-      sidebarPanel(
-        
-      ),
-      
-      mainPanel(
-        
-      )
-    )
-  ),
+        fluidPage(
+          fluidRow(
+           div(
+                plotlyOutput("heatMap", height="700px",width="1000px"),
+                align = "center", style="margin-top: 50px;"
+            )
+          )
+  )),
   
   tabPanel("Tab 3",
            sidebarLayout(

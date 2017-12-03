@@ -4,7 +4,6 @@ library(plotly)
 library(ggplot2)
 
 source('dataset.R')
-
 shinyServer(function(input, output) {
   
   # Create bar graph of the cyber breaches based on the type of organization
@@ -56,6 +55,37 @@ shinyServer(function(input, output) {
       layout(title = "How do data breaches behave over time?",
              xaxis = list(title = "Year (2003 - 2017)"),
              yaxis = list(title = "Number of data breaches"))
+  })
+  
+  output$heatMap <- renderPlotly({
+    
+    xval <- unique(breaches$leak_method)
+    yval <- unique(breaches$data_sensitivity)
+    
+    # Make matrix of cateogircal axes
+    m <- matrix(0, nrow = length(yval), ncol = length(xval))
+    
+    for(i in 1:length(yval)) {
+      for(j in 1:length(xval)){
+        temp <- filter(breaches,leak_method==xval[j]) %>%
+                  filter(data_sensitivity==yval[i])
+        m[i,j] <- nrow(temp)
+      }
+    }
+    
+    custom_txt <- paste0('Leak Method: ', xval,
+                        '<br>Data Sensitivity: ', yval,
+                        '<br>Number of Breaches: ', m)
+    custom_txt <- matrix(unlist(custom_txt), nrow = length(yval), ncol = length(xval))
+      
+    # Make HeatMap
+    p <- plot_ly(
+      x = xval, y = yval,
+      z = m, type = "heatmap",
+      hoverinfo="text",
+      text=custom_txt
+    ) %>%
+      layout(title="Heatmap of Breach Type and Data Sensitivity", margin=list(l=230,b=150))
   })
 })
 
