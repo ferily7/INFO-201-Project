@@ -8,7 +8,6 @@ my.ui <- navbarPage(theme = shinytheme("cosmo"),
   
   # Application title
   "Name",
-
   tabPanel("Tab 1",
     sidebarLayout(
       sidebarPanel(
@@ -25,8 +24,8 @@ my.ui <- navbarPage(theme = shinytheme("cosmo"),
           tags$a(href=story$source_2, "(additional source)")
         }
       ),
-      
-      mainPanel(
+    
+    mainPanel(
         # All of this text needs editing
         tags$h2("What is a data breach?"),
         tags$p("A data breach is when private, confidential or protected data has 
@@ -86,21 +85,31 @@ my.ui <- navbarPage(theme = shinytheme("cosmo"),
              ),
              mainPanel(
                tabsetPanel(
-                 tabPanel("Bar Graph", plotlyOutput("barGraph")),
-                 tabPanel("Time Series", plotlyOutput("timeSeries"))
+                 tabPanel("Bar Graph", br(), plotlyOutput("barGraph")),
+                 tabPanel("Time Series",
+                          tags$br(),
+                          tags$h4("How do data breaches behave over time?"),
+                          tags$p("Below is a time series plot revealing how many data breaches have
+                                 occurred during the 2004-2017. The yellow line is a best-line fit
+                                 highlighting the trend of the data. Notice it remains increasing
+                                 for most of the organization types, with the few exceptions only due
+                                 a smaller sample size."),
+                          tags$br(),
+                          plotlyOutput("timeSeries"))
                )
              )
            )
   ),
   
-  tabPanel("Tab 4",
+  tabPanel("Year vs. Leaked Method",
     sidebarLayout(
       sidebarPanel(
+        sliderInput("obs", "Year:", min = 2004, max = 2017, value = 1, sep = "")
         
       ),
       
       mainPanel(
-        
+        plotlyOutput("distplot")
       )
     )
   ),
@@ -116,5 +125,6 @@ my.ui <- navbarPage(theme = shinytheme("cosmo"),
     )
   )
 )
+  
 
 shinyUI(my.ui)

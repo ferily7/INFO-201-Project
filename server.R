@@ -26,8 +26,26 @@ shinyServer(function(input, output) {
     
     # Make Bar graph
     plot_ly(x = top.ten$records_lost, y = top.ten$abbreviation, type = 'bar', text = ifelse(nchar(top.ten$entity_name) > 20, top.ten$entity_name, "")) %>% 
-      layout(title = "Top 10 Highest Cyber Breaches by Organization", margin = list(l = 150))
+      layout(title = "Top 10 Highest Cyber Breaches", margin = list(l = 150))
   })
+  
+  output$distplot <- renderPlotly({
+    
+    slider.year <- breaches %>% filter(year == input$obs) %>%
+      group_by(leak_method) %>% summarise(count=n())
+    colors <- reactive({
+      return ( c('rgb(176, 208, 211)','rgb(192, 132, 151)','rgb(247, 175, 157)','rgb(247, 227, 175)','rgb(145, 175, 132)') )
+      
+    })
+    
+    plot_ly(slider.year, values = ~count, labels = ~leak_method, type = 'pie',
+            marker = list(colors = colors(),line = list(color = '#FFFFFF', width = 1))) %>%
+      layout(title = 'Information Leak Method Based On Year',
+             xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+             yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+    
+  })
+  
   
   # Create time series of data breaches from 2003 to 2014
   output$timeSeries <- renderPlotly({
@@ -52,7 +70,7 @@ shinyServer(function(input, output) {
     plot_ly(grouped_breaches, x = year, y = counts, type = "scatter", mode = "lines",
             text = paste(counts, "breaches observed in", year)) %>%
       add_trace(x = year, y = fitted(fit), mode = "lines") %>%
-      layout(title = "How do data breaches behave over time?",
+      layout(title = "Number of Data Breaches From 2004 - 2017",
              xaxis = list(title = "Year (2003 - 2017)"),
              yaxis = list(title = "Number of data breaches"))
   })
