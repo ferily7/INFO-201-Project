@@ -13,8 +13,7 @@ shinyServer(function(input, output) {
       # Filtering data by input choice
       type.of.org <- breaches  %>%
         filter(type_org == input$filter)
-    }
-    else{
+    } else{
       type.of.org <- breaches   
     }
     
@@ -24,10 +23,12 @@ shinyServer(function(input, output) {
     
     top.ten <- head(type.of.org, 10)
     top.ten$abbreviation <- ifelse(nchar(top.ten$entity_name) > 20, abbreviate(top.ten$entity_name), top.ten$entity_name)  
+    top.ten$abbreviation <- factor(top.ten$abbreviation, levels = unique(top.ten$abbreviation)[order(top.ten$records_lost, decreasing = FALSE)])
+    
     
     # Make Bar graph
     plot_ly(x = top.ten$records_lost, y = top.ten$abbreviation, type = 'bar', text = ifelse(nchar(top.ten$entity_name) > 20, top.ten$entity_name, "")) %>% 
-      layout(title = "Top 10 Highest Cyber Breaches", margin = list(l = 150))
+      layout(title = "Top 10 Highest Cyber Breaches by Organization", margin = list(l = 150, r = 20))
   })
   
   # Create time series of data breaches from 2003 to 2014

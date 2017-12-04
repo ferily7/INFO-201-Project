@@ -28,7 +28,6 @@ my.ui <- navbarPage(theme = shinytheme("cosmo"),
       ),
       
       mainPanel(
-        # All of this text needs editing
         tags$h2("What is a data breach?"),
         tags$p("A data breach is when private, confidential or protected data has 
                been stolen, copied or viewed by an unauthorized entity."),
