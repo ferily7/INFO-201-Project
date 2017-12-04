@@ -75,6 +75,21 @@ shinyServer(function(input, output) {
              yaxis = list(title = "Number of data breaches"))
   })
   
+  output$pie <- renderPlotly({
+    
+    # Group data sensitivity according to the selected year. 
+    get.data_sensitivity <- breaches %>% filter(input$year == breaches$year) %>% 
+      group_by(data_sensitivity) %>% 
+      summarize(count = n())
+    
+    # create a pie chart to show the data sensitivity in a particular year 
+    plot_ly(get.data_sensitivity, values = ~count, labels = ~data_sensitivity, type = "pie" ) %>%
+      layout(title = 'Data Sensitivity Pie Chart',
+             xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+             yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+  })
+  
+  
   output$heatMap <- renderPlotly({
     
     xval <- unique(breaches$leak_method)
