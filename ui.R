@@ -53,6 +53,8 @@ my.ui <- navbarPage(theme = shinytheme("cosmo"),
   tabPanel("Breach Type & Data Sensitivity",
     fluidPage(
       fluidRow(
+        h4("Title"),
+        p("Description"),
         div(
           plotlyOutput("heatMap", height="700px",width="1000px"),
           align = "center", style="margin-top: 50px;"
@@ -87,7 +89,6 @@ my.ui <- navbarPage(theme = shinytheme("cosmo"),
       mainPanel(
         tabsetPanel(
           tabPanel("Bar Graph", 
-                   br(),
                    h4("Which type of organizations have the highest amount of breaches?"),
                    p("Below is a bar graph showing the top 10 organizations who have had the 
                       highest number of cyber breaches. On the x-axis is the number of records
@@ -97,7 +98,6 @@ my.ui <- navbarPage(theme = shinytheme("cosmo"),
                    br(),
                    plotlyOutput("barGraph")),
           tabPanel("Time Series",
-                   br(),
                    h4("How do data breaches behave over time?"),
                    p("Below is a time series plot revealing how many data breaches have
                       occurred during the 2004-2017. The yellow line is a best-line fit
@@ -120,11 +120,15 @@ my.ui <- navbarPage(theme = shinytheme("cosmo"),
       mainPanel(
         tabsetPanel(
           tabPanel("Pie 1",
+                   h4("Title"),
+                   p("Description"),
                    br(),
                    plotlyOutput("pie")
           ),
           
           tabPanel("Pie 2",
+                   h4("Title"),
+                   p("Description"),
                    br(),
                    plotlyOutput("distplot")
           )
