@@ -53,8 +53,6 @@ my.ui <- navbarPage(theme = shinytheme("cosmo"),
   tabPanel("Breach Type & Data Sensitivity",
     fluidPage(
       fluidRow(
-        h4("Title"),
-        p("Description"),
         div(
           plotlyOutput("heatMap", height="700px",width="1000px"),
           align = "center", style="margin-top: 50px;"
@@ -120,15 +118,11 @@ my.ui <- navbarPage(theme = shinytheme("cosmo"),
       mainPanel(
         tabsetPanel(
           tabPanel("Pie 1",
-                   h4("Title"),
-                   p("Description"),
                    br(),
                    plotlyOutput("pie")
           ),
           
           tabPanel("Pie 2",
-                   h4("Title"),
-                   p("Description"),
                    br(),
                    plotlyOutput("distplot")
           )
