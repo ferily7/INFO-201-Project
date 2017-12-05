@@ -2,15 +2,13 @@ library(shinythemes)
 library(shiny)
 library(plotly)
 library(ggplot2)
-
 source('dataset.R')
 
 my.ui <- navbarPage(theme = shinytheme("cosmo"),
   
   # Application title
   "Name",
-
-  tabPanel("Tab 1",
+  tabPanel("Data Breaches",
     sidebarLayout(
       sidebarPanel(
         tags$h4("Story of the day"),
@@ -26,8 +24,8 @@ my.ui <- navbarPage(theme = shinytheme("cosmo"),
           tags$a(href=story$source_2, "(additional source)")
         }
       ),
-      
-      mainPanel(
+    
+    mainPanel(
         tags$h2("What is a data breach?"),
         tags$p("A data breach is when private, confidential or protected data has 
                been stolen, copied or viewed by an unauthorized entity."),
@@ -52,71 +50,89 @@ my.ui <- navbarPage(theme = shinytheme("cosmo"),
     )
   ),
   
-  tabPanel("Tab 2",
-    sidebarLayout(
-      sidebarPanel(
-        
-      ),
-      
-      mainPanel(
-        
+  tabPanel("Breach Type & Data Sensitivity",
+    fluidPage(
+      fluidRow(
+        div(
+          plotlyOutput("heatMap", height="700px",width="1000px"),
+          align = "center", style="margin-top: 50px;"
+        )
       )
     )
   ),
   
-  tabPanel("Tab 3",
-           sidebarLayout(
-             sidebarPanel(
-               selectInput("filter", "Filter by:",
-                           c("All" = "all",
-                             "Web" = "web", 
-                             "Financial" = "financial", 
-                             "Telecommunications" = "telecoms", 
-                             "Technology" = "tech", 
-                             "Government" = "government", 
-                             "Retail" = "retail", 
-                             "Energy" = "energy", 
-                             "Academia" = "academic", 
-                             "Healthcare" = "healthcare", 
-                             "Military" = "military",
-                             "Gaming" = "gaming", 
-                             "Media" = "media", 
-                             "Transportation" = "transport", 
-                             "Legal" = "legal", 
-                             "Applications" = "app")
-               )
-             ),
-             mainPanel(
-               tabsetPanel(
-                 tabPanel("Bar Graph", br(), plotlyOutput("barGraph")),
-                 tabPanel("Time Series", br(), plotlyOutput("timeSeries"))
-               )
-             )
-           )
-  ),
-  
-  tabPanel("Tab 4",
+  tabPanel("Type of Organizations",
     sidebarLayout(
       sidebarPanel(
-        
+        selectInput("filter", "Filter by:",
+                    c("All" = "all",
+                      "Web" = "web",
+                      "Financial" = "financial",
+                      "Telecommunications" = "telecoms", 
+                      "Technology" = "tech", 
+                      "Government" = "government", 
+                      "Retail" = "retail", 
+                      "Energy" = "energy", 
+                      "Academia" = "academic", 
+                      "Healthcare" = "healthcare", 
+                      "Military" = "military",
+                      "Gaming" = "gaming", 
+                      "Media" = "media", 
+                      "Transportation" = "transport", 
+                      "Legal" = "legal", 
+                      "Applications" = "app")
+        )
       ),
       
       mainPanel(
-        
+        tabsetPanel(
+          tabPanel("Bar Graph", 
+                   br(),
+                   h4("Which type of organizations have the highest amount of breaches?"),
+                   p("Below is a bar graph showing the top 10 organizations who have had the 
+                      highest number of cyber breaches. On the x-axis is the number of records
+                      lost in the organization and the y-axis is the name of the organization.
+                      Each organization type has a different amount of records lost from cyber
+                      breaches, with some organizations affected more than others."),
+                   br(),
+                   plotlyOutput("barGraph")),
+          tabPanel("Time Series",
+                   br(),
+                   h4("How do data breaches behave over time?"),
+                   p("Below is a time series plot revealing how many data breaches have
+                      occurred during the 2004-2017. The yellow line is a best-line fit
+                      highlighting the trend of the data. Notice it remains increasing
+                      for most of the organization types, with the few exceptions only due
+                      a smaller sample size."),
+                   br(),
+                   plotlyOutput("timeSeries"))
+        )
       )
     )
   ),
-
-  tabPanel("Tab 5",
+  
+  tabPanel("Year",
     sidebarLayout(
       sidebarPanel(
-
+        sliderInput("obs", "Year:", min = 2004, max = 2017, value = 1, sep = "")
       ),
+      
       mainPanel(
-
+        tabsetPanel(
+          tabPanel("Pie 1",
+                   br(),
+                   plotlyOutput("pie")
+          ),
+          
+          tabPanel("Pie 2",
+                   br(),
+                   plotlyOutput("distplot")
+          )
+        )
       )
     )
   )
 )
+  
 
 shinyUI(my.ui)
