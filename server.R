@@ -21,8 +21,13 @@ shinyServer(function(input, output) {
     }
     
     top.ten <- head(type.of.org, 10)
-    top.ten$abbreviation <- ifelse(nchar(top.ten$entity_name) > 20, abbreviate(top.ten$entity_name), top.ten$entity_name)
     
+    # Combining duplicates in the dataframe together
+    top.ten <- top.ten %>% group_by(entity_name) %>% summarize(records_lost = sum(records_lost))
+    
+    top.ten$abbreviation <- ifelse(nchar(top.ten$entity_name) > 20, abbreviate(top.ten$entity_name), top.ten$entity_name)  
+    top.ten$abbreviation <- factor(top.ten$abbreviation, levels = unique(top.ten$abbreviation)[order(as.numeric(top.ten$records_lost), decreasing = FALSE)])
+
     # Make Bar graph
     plot_ly(x = top.ten$records_lost, y = top.ten$abbreviation, type = 'bar', text = ifelse(nchar(top.ten$entity_name) > 20, top.ten$entity_name, "")) %>% 
       layout(title = "Top 10 Highest Cyber Breaches by Organization", margin = list(l = 150, r = 20))
