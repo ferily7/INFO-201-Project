@@ -49,6 +49,25 @@ my.ui <- navbarPage(theme = shinytheme("cosmo"),
                                  )
                                  )
                                  ),
+                    tabPanel("Number of Records Lost (by Quantiles)",
+                             fluidPage(
+                               h4("How do data breaches compare against each other?"),
+                               p("Below is a bubble chart designed to illustrate the magnititude of different data breaches
+                                 when compared both relatively and to all breaches as a whole. We see that especially as time
+                                 goes on, more and more records are being stolen during a breach as the world continues to obtain
+                                 data at an astonishing rate. However, there continues to be large amounts of variance in what 
+                                 sector is attacked or by which method. Hackers will use any means neccessary to breach!"),
+                               br(),
+                               plotlyOutput("bubble"),
+                               hr(),
+                               fluidRow(
+                                 column(4),
+                                 column(4,
+                                        sliderInput("quantile", "Quantile:", min = 1, max = 16, value = 1, sep = "")),
+                                 column(4)
+                               )
+                               )
+                             ),
                     
                     tabPanel("Breach Type & Data Sensitivity",
                              fluidPage(

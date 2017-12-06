@@ -125,5 +125,35 @@ shinyServer(function(input, output) {
     ) %>%
       layout(title="Heatmap of Breach Type and Data Sensitivity", margin=list(l=230,b=150))
   })
+  
+  # Create bubble chart organized by year and data sensitivity with size describing # of records lost
+  output$bubble <- renderPlotly({
+    # Add quantile column
+    data <- breaches %>% mutate(quantile = ntile(records_lost, 16)) %>% 
+      filter(quantile == input$quantile)
+    
+    p <- plot_ly(data, x = ~jitter(year, factor=5), y = ~data_sensitivity, 
+                 color = ~leak_method, 
+                 size = ~(records_lost),
+                 type = 'scatter', mode = 'markers',
+                 marker = list(symbol = 'circle', sizemode = 'diameter',
+                               line = list(width = 2, color = '#FFFFFF')),
+                 text = ~paste('Entity:', entity_name, '<br>Est. Records lost:', records_lost,
+                               '<br>Method of loss:', leak_method)) %>%
+      layout(title = 'All Entities Affected By Breach By Quartiles',
+             xaxis = list(title = 'Year',
+                          gridcolor = 'rgb(255, 255, 255)',
+                          zerolinewidth = 1,
+                          ticklen = 5,
+                          gridwidth = 2),
+             yaxis = list(title = 'Sensitivity of Data',
+                          gridcolor = 'rgb(255, 255, 255)',
+                          zerolinewidth = 1,
+                          ticklen = 5,
+                          gridwith = 2),
+             paper_bgcolor = 'rgb(243, 243, 243)',
+             plot_bgcolor = 'rgb(243, 243, 243)',
+             margin = list(l = 220, r = 20, t = 50)) %>% hide_legend()
+  })
 })
 
