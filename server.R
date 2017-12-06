@@ -82,7 +82,7 @@ shinyServer(function(input, output) {
       group_by(data_sensitivity) %>% 
       summarize(count = n())
     colors.2 <- reactive({
-      return ( c('rgb(234, 234, 227)','rgb(96, 133, 132)','rgb(114, 96, 103)','rgb(115, 132, 145)','rgb(43, 43, 49)') )
+      return ( c('rgb(134, 146, 134)','rgb(244, 241, 241)','rgb(154, 122, 90)','rgb(102, 130, 172)','rgb(40, 50, 39)') )
     })
     
     # create a pie chart to show the data sensitivity in a particular year 
