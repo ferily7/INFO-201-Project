@@ -29,7 +29,7 @@ shinyServer(function(input, output) {
     top.ten$abbreviation <- factor(top.ten$abbreviation, levels = unique(top.ten$abbreviation)[order(as.numeric(top.ten$records_lost), decreasing = FALSE)])
 
     # Make Bar graph
-    plot_ly(x = top.ten$records_lost, y = top.ten$abbreviation, type = 'bar', text = ifelse(nchar(top.ten$entity_name) > 20, top.ten$entity_name, "")) %>% 
+    plot_ly(x = top.ten$records_lost, y = top.ten$abbreviation, type = 'bar', marker = list(color = 'rgb(96, 133, 132)'), text = ifelse(nchar(top.ten$entity_name) > 20, top.ten$entity_name, "")) %>% 
       layout(title = "Top 10 Highest Cyber Breaches by Organization", margin = list(l = 150, r = 20))
   })
   
@@ -60,13 +60,12 @@ shinyServer(function(input, output) {
              xaxis = list(title = "Year (2003 - 2017)"),
              yaxis = list(title = "Number of data breaches"))
   })
-  
+  # creates pie chart displaying the leak method depending on the year
   output$distplot <- renderPlotly({
     slider.year <- breaches %>% filter(year == input$obs) %>%
       group_by(leak_method) %>% summarise(count=n())
     colors <- reactive({
-      return ( c('rgb(176, 208, 211)','rgb(192, 132, 151)','rgb(247, 175, 157)','rgb(247, 227, 175)','rgb(145, 175, 132)') )
-      
+      return ( c('rgb(234, 234, 227)','rgb(96, 133, 132)','rgb(114, 96, 103)','rgb(115, 132, 145)','rgb(43, 43, 49)') )
     })
     
     plot_ly(slider.year, values = ~count, labels = ~leak_method, type = 'pie',
@@ -82,9 +81,13 @@ shinyServer(function(input, output) {
     get.data_sensitivity <- breaches %>% filter(input$obs == year) %>% 
       group_by(data_sensitivity) %>% 
       summarize(count = n())
+    colors.2 <- reactive({
+      return ( c('rgb(234, 234, 227)','rgb(96, 133, 132)','rgb(114, 96, 103)','rgb(115, 132, 145)','rgb(43, 43, 49)') )
+    })
     
     # create a pie chart to show the data sensitivity in a particular year 
-    plot_ly(get.data_sensitivity, values = ~count, labels = ~data_sensitivity, type = "pie" ) %>%
+    plot_ly(get.data_sensitivity, values = ~count, labels = ~data_sensitivity, type = "pie",
+            marker = list(colors = colors.2(),line = list(color = '#FFFFFF', width = 1))) %>%
       layout(title = 'Data Sensitivity by Year',
              xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
              yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
@@ -112,9 +115,10 @@ shinyServer(function(input, output) {
     custom_txt <- matrix(unlist(custom_txt), nrow = length(yval), ncol = length(xval))
       
     # Make HeatMap
+
     p <- plot_ly(
       x = xval, y = yval,
-      z = m, type = "heatmap",
+      z = m, type = "heatmap", colors = colorRamp(c("#eaeae3","#608584")),
       hoverinfo="text",
       text=custom_txt
     ) %>%
