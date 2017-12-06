@@ -45,6 +45,7 @@ shinyServer(function(input, output) {
         group_by(year) %>%
         summarise(counts = n())
     }
+    
     # Isolate counts and year to function as hover label
     counts <- grouped_breaches$counts
     year <- grouped_breaches$year
@@ -53,11 +54,11 @@ shinyServer(function(input, output) {
     fit <- lm(counts ~ year, data = grouped_breaches)
     
     # Make time series
-    plot_ly(grouped_breaches, x = year, y = counts, type = "scatter", mode = "lines",
+    plot_ly(grouped_breaches, x = year, y = counts, name = "Data breaches" ,type = "scatter", mode = "lines+markers",
             text = paste(counts, "breaches observed in", year)) %>%
-      add_trace(x = year, y = fitted(fit), mode = "lines") %>%
+      add_trace(x = year, y = fitted(fit), mode = "lines", name = "Overall trend") %>%
       layout(title = "Number of Data Breaches From 2004 - 2017",
-             xaxis = list(title = "Year (2003 - 2017)"),
+             xaxis = list(title = "Year (2004 - 2017)"),
              yaxis = list(title = "Number of data breaches"))
   })
   # creates pie chart displaying the leak method depending on the year

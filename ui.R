@@ -102,6 +102,9 @@ my.ui <- navbarPage(theme = shinytheme("cosmo"),
                                               highlighting the trend of the data. Notice it remains increasing
                                               for most of the organization types, with the few exceptions only due
                                               a smaller sample size."),
+                                            p("Note: This plot is not meaningful when filtered by 'Legal' or 'Applications'
+                                              due to the dataset having only 1 record for it. This disclaimer follows similarly
+                                              for filters that result in a few sample points."),
                    br(),
                    plotlyOutput("timeSeries"))
         )
