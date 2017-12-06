@@ -12,7 +12,8 @@ breaches$year <- breaches$year + 2004
 # Drop records_lost col due to superior measure records_lost_v2 col, then rename
 breaches <- breaches %>% select(-records_lost) %>% rename(records_lost = records_lost_v2)
 
-# Select random story from interesting list
+# For demonstration purposes, select random story from interesting list
+# This can be made in a "Story of the day" by using System.date() and checking within a 24 hour period
 top.stories <- breaches %>% filter(interesting == "y")
 story <- top.stories[sample(nrow(top.stories), 1), ]
 
