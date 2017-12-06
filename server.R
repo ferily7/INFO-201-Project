@@ -123,7 +123,7 @@ shinyServer(function(input, output) {
       hoverinfo="text",
       text=custom_txt
     ) %>%
-      layout(title="Heatmap of Breach Type and Data Sensitivity", margin=list(l=230,b=150))
+      layout(title="Heatmap of Breach Type and Data Sensitivity", margin=list(l=230,b=120,t=50))
   })
   
   # Create bubble chart organized by year and data sensitivity with size describing # of records lost
