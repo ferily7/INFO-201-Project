@@ -51,7 +51,7 @@ my.ui <- dashboardPage(skin = "purple",
                  )
                ),
                column(width = 6,
-                      box(
+                      box( width=10,
                         tags$h4("Story of the day"),
                         tags$p("Today's story is with ", tags$b(story$entity_name),
                                if (story$alt_name != ""){
@@ -92,9 +92,9 @@ my.ui <- dashboardPage(skin = "purple",
       
       tabItem(tabName = "map",
               fluidPage(
-                fluidRow(
-                  h4("Title"),
-                  p("Description"),
+                box(width = 12,
+                  h4("What type of data was leaked and how was it leaked?"),
+                  p("Below is a heatmap of the data that was leaked and the method it was leaked from 2004-2017. The colors correspond to the number of occurrences. Looking at the map we can see that most breaches are hacked general info. We can also conclude that most of the lost data came from hacks. Companies seldom lost data to poor security or inside jobs."),
                   br(),
                   plotlyOutput("heatMap", height="750px")
                 )

@@ -9,4 +9,23 @@ h2 {
 
 h4 {
     margin-top: 0;
+    font-size: 2em;
+    margin-bottom: 0.5em;
+}
+
+h2,h4 {
+  font-weight:500;
+}
+
+.box {
+  padding:2em 3em;
+}
+
+.tab-content{
+  padding: 0.5em;
+}
+
+.content {
+  max-width: 1200px;
+  margin: auto;
 }

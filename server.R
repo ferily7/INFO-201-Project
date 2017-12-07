@@ -111,18 +111,12 @@ shinyServer(function(input, output) {
       }
     }
     
-    custom_txt <- paste0('Leak Method: ', xval,
-                        '<br>Data Sensitivity: ', yval,
-                        '<br>Number of Breaches: ', m)
-    custom_txt <- matrix(unlist(custom_txt), nrow = length(yval), ncol = length(xval))
       
     # Make HeatMap
 
     p <- plot_ly(
       x = xval, y = yval,
-      z = m, type = "heatmap", colors = colorRamp(c("#eaeae3","#608584")),
-      hoverinfo="text",
-      text=custom_txt
+      z = m, type = "heatmap", colors = colorRamp(c("#eaeae3","#608584"))
     ) %>%
       layout(title="Heatmap of Breach Type and Data Sensitivity", margin=list(l=230,b=120,t=50))
   })
