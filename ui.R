@@ -27,7 +27,7 @@ my.ui <- dashboardPage(skin = "purple",
       tabItem(tabName = "home",
               fluidRow(
                 column(width = 6,
-                  tags$div(class = "content",
+                  div(class = "content",
                            h2("What is a data breach?"),
                            p("A data breach is when private, confidential or protected data has 
                              been stolen, copied or viewed by an unauthorized entity."),
@@ -52,15 +52,15 @@ my.ui <- dashboardPage(skin = "purple",
                ),
                column(width = 6,
                       box( width=10,
-                        tags$h4("Story of the day"),
-                        tags$p("Today's story is with ", tags$b(story$entity_name),
+                        h4("Story of the day"),
+                        p("Today's story is with ", tags$b(story$entity_name),
                                if (story$alt_name != ""){
                                  (paste0("(",story$alt_name,")"))
                                }
                         ),
-                        tags$p("In ", story$year, ", ", story$description),
-                        tags$p("There was an estimated ", story$records_lost, " records lost!"),
-                        tags$a(href=story$source_1, "Continue reading..."),
+                        p("In ", story$year, ", ", story$description),
+                        p("There was an estimated ", story$records_lost, " records lost!"),
+                        a(href=story$source_1, "Continue reading..."),
                         if (story$source_2 != "") {
                           tags$a(href=story$source_2, "(additional source)")
                         }

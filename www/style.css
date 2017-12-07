@@ -9,7 +9,7 @@ h2 {
 
 h4 {
     margin-top: 0;
-    font-size: 2em;
+    font-size: 1.5em;
     margin-bottom: 0.5em;
 }
 
@@ -18,7 +18,7 @@ h2,h4 {
 }
 
 .box {
-  padding:2em 3em;
+  padding:1em 2em;
 }
 
 .tab-content{
