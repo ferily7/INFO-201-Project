@@ -142,6 +142,9 @@ my.ui <- dashboardPage(skin = "purple",
                               for most of the organization types, with the few exceptions only due
                               a smaller sample size."),
                            br(),
+                           p("Note: This plot is not meaningful when filtered by 'Legal' or 'Applications'
+                              due to the dataset having only 1 record for it. This disclaimer follows similarly
+                             for filters that result in a few sample points."),
                            plotlyOutput("timeSeries"))
                 )
               )
