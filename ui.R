@@ -26,43 +26,46 @@ my.ui <- dashboardPage(skin = "purple",
       # First tab content
       tabItem(tabName = "home",
               fluidRow(
-                box(
-                  tags$h4("Story of the day"),
-                  tags$p("Today's story is with ", tags$b(story$entity_name),
-                         if (story$alt_name != ""){
-                           (paste0("(",story$alt_name,")"))
-                           }
-                         ),
-                  tags$p("In ", story$year, ", ", story$description),
-                  tags$p("There was an estimated ", story$records_lost, " records lost!"),
-                  tags$a(href=story$source_1, "Continue reading..."),
-                  if (story$source_2 != "") {
-                    tags$a(href=story$source_2, "(additional source)")
-                  }
-                ),
-
-                tags$div(class = "content",
-                         h2("What is a data breach?"),
-                         p("A data breach is when private, confidential or protected data has 
-                           been stolen, copied or viewed by an unauthorized entity."),
-                         h2("What are examples of data breaches and how bad can they be?"),
-                         p("A common example of a data breach is when some malicious user hacks into
-                           an unauthorized network and steals data files. However, data breaches can
-                           also occur simply when an employee leaves confidential information up on their
-                           computer screen and some unauthorized employee is able to read it."),
-                         p("One of the most recent security breach that occurred was the Equifax Security Leak.
-                           Because of the data breach, it impacted more than 2.5 million Americans, which included 
-                           information such as social security numbers, addresses, driver license numbers and credit card 
-                           information."),
-                         h2("Why are data breaches bad? Who does it impact?"),
-                         p("When a company is hit by a data breach, some form of asset is being stolen, so some 
-                           revenue is lost. This is amplified when media paints them in a negative light.
-                           However, this is not why a data breach can be devastating. What if the data that 
-                           was stolen included ", em("your personal information?"), " Now, private information is no longer 
-                           private and can end up being sold, with your privacy violated. When a company is hit 
-                           by a data breach, especially when the company handles sensitive information such as 
-                           bank accounts, passwords, or health records, ", em("all consumers are impacted."))
-               )
+                column(width = 6,
+                  tags$div(class = "content",
+                           h2("What is a data breach?"),
+                           p("A data breach is when private, confidential or protected data has 
+                             been stolen, copied or viewed by an unauthorized entity."),
+                           h2("What are examples of data breaches and how bad can they be?"),
+                           p("A common example of a data breach is when some malicious user hacks into
+                             an unauthorized network and steals data files. However, data breaches can
+                             also occur simply when an employee leaves confidential information up on their
+                             computer screen and some unauthorized employee is able to read it."),
+                           p("One of the most recent security breach that occurred was the Equifax Security Leak.
+                             Because of the data breach, it impacted more than 2.5 million Americans, which included 
+                             information such as social security numbers, addresses, driver license numbers and credit card 
+                             information."),
+                           h2("Why are data breaches bad? Who does it impact?"),
+                           p("When a company is hit by a data breach, some form of asset is being stolen, so some 
+                             revenue is lost. This is amplified when media paints them in a negative light.
+                             However, this is not why a data breach can be devastating. What if the data that 
+                             was stolen included ", em("your personal information?"), " Now, private information is no longer 
+                             private and can end up being sold, with your privacy violated. When a company is hit 
+                             by a data breach, especially when the company handles sensitive information such as 
+                             bank accounts, passwords, or health records, ", em("all consumers are impacted."))
+                 )
+               ),
+               column(width = 6,
+                      box(
+                        tags$h4("Story of the day"),
+                        tags$p("Today's story is with ", tags$b(story$entity_name),
+                               if (story$alt_name != ""){
+                                 (paste0("(",story$alt_name,")"))
+                               }
+                        ),
+                        tags$p("In ", story$year, ", ", story$description),
+                        tags$p("There was an estimated ", story$records_lost, " records lost!"),
+                        tags$a(href=story$source_1, "Continue reading..."),
+                        if (story$source_2 != "") {
+                          tags$a(href=story$source_2, "(additional source)")
+                        }
+                      )
+                    )
               )
       ),
 

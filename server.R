@@ -4,6 +4,7 @@ library(plotly)
 library(ggplot2)
 
 source('dataset.R')
+
 shinyServer(function(input, output) {
   
   # Create bar graph of the cyber breaches based on the type of organization
@@ -94,12 +95,12 @@ shinyServer(function(input, output) {
              yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
   })
   
-  # Creating a heap map of the breach type and data sensitivity
+  # Creating a heat map of the breach type and data sensitivity
   output$heatMap <- renderPlotly({
     xval <- unique(breaches$leak_method)
     yval <- unique(breaches$data_sensitivity)
     
-    # Make matrix of cateogircal axes
+    # Make matrix of categorical axes
     m <- matrix(0, nrow = length(yval), ncol = length(xval))
     
     for(i in 1:length(yval)) {
@@ -135,24 +136,24 @@ shinyServer(function(input, output) {
     p <- plot_ly(data, x = ~jitter(year, factor=5), y = ~data_sensitivity, 
                  color = ~leak_method, 
                  size = ~(records_lost),
-                 type = 'scatter', mode = 'markers',
-                 marker = list(symbol = 'circle', sizemode = 'diameter',
-                               line = list(width = 2, color = '#FFFFFF')),
-                 text = ~paste('Entity:', entity_name, '<br>Est. Records lost:', records_lost,
-                               '<br>Method of loss:', leak_method)) %>%
-      layout(title = 'All Entities Affected By Breach By Quartiles',
-             xaxis = list(title = 'Year',
-                          gridcolor = 'rgb(255, 255, 255)',
+                 type = "scatter", mode = "markers",
+                 marker = list(symbol = "circle", sizemode = "diameter",
+                               line = list(width = 2, color = "#FFFFFF")),
+                 text = ~paste("Entity:", entity_name, "<br>Est. Records lost:", records_lost,
+                               "<br>Method of loss:", leak_method)) %>%
+      layout(title = "All Entities Affected By Breach By Quartiles",
+             xaxis = list(title = "Year",
+                          gridcolor = "rgb(255, 255, 255)",
                           zerolinewidth = 1,
                           ticklen = 5,
                           gridwidth = 2),
-             yaxis = list(title = 'Sensitivity of Data',
-                          gridcolor = 'rgb(255, 255, 255)',
+             yaxis = list(title = "Sensitivity of Data",
+                          gridcolor = "rgb(255, 255, 255)",
                           zerolinewidth = 1,
                           ticklen = 5,
                           gridwith = 2),
-             paper_bgcolor = 'rgb(243, 243, 243)',
-             plot_bgcolor = 'rgb(243, 243, 243)',
+             paper_bgcolor = "rgb(243, 243, 243)",
+             plot_bgcolor = "rgb(243, 243, 243)",
              margin = list(l = 220, r = 20, t = 50)) %>% hide_legend()
   })
 })
