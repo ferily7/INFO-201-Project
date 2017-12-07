@@ -164,7 +164,7 @@ my.ui <- dashboardPage(skin = "purple",
                            plotlyOutput("pie")
                   ),
                   tabPanel("Leak Method",
-                           h4("How has the information leak method changed throughout the years?"),
+                           h4("How has the information leak method changed over time?"),
                            p("This pie chart shows how data has leaked from 2004 to 2017. As you see, progressively, the leak method
                              becomes more varied. This shows that data breaches is developing at a rapid speed, with new ways to hack into
                              data bases frequently. In addition, in the more recent years, there has been a surge of hacking as a method
