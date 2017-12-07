@@ -156,8 +156,10 @@ my.ui <- dashboardPage(skin = "purple",
 
                 tabBox(width = 8,
                   tabPanel("Data Sensitivity",
-                           h4("Title"),
-                           p("Description"),
+                           h4("How has the data sensitivity changed over time?"),
+                           p("Sensitive information is defined as information that is protected against unwarranted disclosure. The pie chart below gives the information 
+                             about the type of data sensitivity that changed over years from the year 2004 to 2017. As displayed, the type of data sensitivity has changed and 
+                             gradually increased over time."),
                            br(),
                            plotlyOutput("pie")
                   ),
