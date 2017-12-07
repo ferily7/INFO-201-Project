@@ -154,7 +154,7 @@ shinyServer(function(input, output) {
                           gridwith = 2),
              paper_bgcolor = "rgb(243, 243, 243)",
              plot_bgcolor = "rgb(243, 243, 243)",
-             margin = list(l = 220, r = 20, t = 50)) %>% hide_legend()
+             margin = list(l = 245, r = 20, t = 50)) %>% hide_legend()
   })
 })
 
